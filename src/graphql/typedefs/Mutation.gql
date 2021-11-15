@@ -1,0 +1,6 @@
+type Mutation {
+  register( name: String!, email: String!, password: String!): AuthPayload!
+  login(email: String!, password: String!): AuthPayload!
+  logout(refresh_token: String!): Boolean!
+  refresh_token(refresh_token: String!): AuthPayload!
+}

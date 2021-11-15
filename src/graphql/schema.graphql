@@ -1,0 +1,71 @@
+type AuthPayload {
+  accessToken: String!
+  refreshToken: String!
+}
+
+enum Order {
+  asc
+  desc
+}
+
+type Genre {
+  id: Int!
+  genre: String!
+}
+
+type Keyword {
+  id: Int!
+  keyword: String!
+}
+
+type Movie {
+  id: ID!
+  title: String!
+  year: Int!
+  popularity: Int!
+  description: String!
+  content_rating: String!
+  movie_length: Float!
+  rating: Float!
+  created_at: String!
+  trailer: String!
+  image_url: String!
+  release: String
+  plot: String!
+  banner: String!
+  type: String!
+  genres: [Genre!]!
+  keywords: [Keyword!]!
+}
+
+enum MoviesSort {
+  title
+  popularity
+  release
+  rating
+}
+
+type Mutation {
+  register( name: String!, email: String!, password: String!): AuthPayload!
+  login(email: String!, password: String!): AuthPayload!
+  logout(refresh_token: String!): Boolean!
+  refresh_token(refresh_token: String!): AuthPayload!
+}
+
+type Query {
+  me: User
+  movies(
+    sort: MoviesSort! = title
+    order: Order! = asc
+    page: Int! = 1
+    limit: Int! = 10
+  ): [Movie!]!
+  movie(id: ID!): Movie!
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+}
+

@@ -1,0 +1,10 @@
+type Query {
+  me: User
+  movies(
+    sort: MoviesSort! = title
+    order: Order! = asc
+    page: Int! = 1
+    limit: Int! = 10
+  ): [Movie!]!
+  movie(id: ID!): Movie!
+}

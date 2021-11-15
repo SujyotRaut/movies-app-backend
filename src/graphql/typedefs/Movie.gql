@@ -1,0 +1,26 @@
+type Movie {
+  id: ID!
+  title: String!
+  year: Int!
+  popularity: Int!
+  description: String!
+  content_rating: String!
+  movie_length: Float!
+  rating: Float!
+  created_at: String!
+  trailer: String!
+  image_url: String!
+  release: String
+  plot: String!
+  banner: String!
+  type: String!
+  genres: [Genre!]!
+  keywords: [Keyword!]!
+}
+
+enum MoviesSort {
+  title
+  popularity
+  release
+  rating
+}

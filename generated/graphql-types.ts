@@ -17,6 +17,7 @@ export type Scalars = {
 export type AuthPayload = {
   __typename?: 'AuthPayload';
   accessToken: Scalars['String'];
+  currentUser: User;
   refreshToken: Scalars['String'];
 };
 
@@ -226,6 +227,7 @@ export type ResolversParentTypes = {
 
 export type AuthPayloadResolvers<ContextType = Context, ParentType extends ResolversParentTypes['AuthPayload'] = ResolversParentTypes['AuthPayload']> = {
   accessToken?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  currentUser?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
   refreshToken?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };

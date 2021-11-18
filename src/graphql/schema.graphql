@@ -1,6 +1,7 @@
 type AuthPayload {
   accessToken: String!
   refreshToken: String!
+  currentUser: User!
 }
 
 enum Order {

@@ -1,15 +1,13 @@
 import { Request } from 'express';
-import { AuthenticationError } from 'apollo-server-core';
 import { verifyAccessToken } from './jwt-utils';
 
 export function getUserId(req: Request) {
   const authHeader = req.headers.authorization;
+  if (!authHeader) return null;
 
-  if (!authHeader) return;
   const token = authHeader.split(' ')[1];
+  const payload = verifyAccessToken(token);
+  if (!payload) return null;
 
-  if (!token) throw new AuthenticationError('Unauthorized');
-
-  const { userId } = verifyAccessToken(token);
-  return userId;
+  return payload.userId;
 }

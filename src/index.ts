@@ -1,10 +1,10 @@
-import http from 'http';
-import express from 'express';
 import { PrismaClient } from '@prisma/client';
-import { typeDefs, resolvers } from './graphql';
-import { ApolloServer } from 'apollo-server-express';
 import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core';
+import { ApolloServer } from 'apollo-server-express';
+import express from 'express';
+import http from 'http';
 import { Resolvers } from '../generated/graphql-types';
+import { resolvers, typeDefs } from './graphql';
 import { getUserId } from './utils/auth-utils';
 
 export type Context = {

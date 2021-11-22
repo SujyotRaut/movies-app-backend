@@ -11,7 +11,7 @@ export const signAccessToken = (payload: TokenPayload) => {
   try {
     return jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET!, {
       issuer: 'movies-app',
-      expiresIn: '1h',
+      expiresIn: '15s',
     });
   } catch (error) {
     throw new ApolloError('Internal server error');
@@ -24,7 +24,7 @@ export const verifyAccessToken = (token: string) => {
   } catch (err) {
     if (err instanceof TokenExpiredError)
       throw new ApolloError('Unauthorized! Token expired', 'TOKEN_EXPIRED');
-    else throw new AuthenticationError('Unauthorized!');
+    else return null;
   }
 };
 
@@ -57,8 +57,6 @@ export const verifyRefreshToken = (token: string) => {
     // Throw error if refresh token is not valid
     throw new AuthenticationError('Unauthorized!');
   } catch (err) {
-    if (err instanceof TokenExpiredError)
-      throw new ApolloError('Unauthorized! Token expired', 'TOKEN_EXPIRED');
-    else throw new AuthenticationError('Unauthorized!');
+    throw new AuthenticationError('Unauthorized!');
   }
 };

@@ -5,16 +5,18 @@ CREATE TABLE "Movie" (
     "year" INTEGER NOT NULL,
     "popularity" INTEGER NOT NULL,
     "description" TEXT NOT NULL,
-    "content_rating" TEXT NOT NULL,
-    "movie_length" REAL NOT NULL,
+    "contentRating" TEXT NOT NULL,
+    "movieLength" REAL NOT NULL,
     "rating" REAL NOT NULL,
-    "created_at" TEXT NOT NULL,
+    "createdAt" TEXT NOT NULL,
     "trailer" TEXT NOT NULL,
-    "image_url" TEXT NOT NULL,
+    "imageUrl" TEXT NOT NULL,
     "release" TEXT,
     "plot" TEXT NOT NULL,
     "banner" TEXT NOT NULL,
-    "type" TEXT NOT NULL
+    "type" TEXT NOT NULL,
+    "userId" TEXT,
+    CONSTRAINT "Movie_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 -- CreateTable

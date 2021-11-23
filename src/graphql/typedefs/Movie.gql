@@ -4,18 +4,18 @@ type Movie {
   year: Int!
   popularity: Int!
   description: String!
-  content_rating: String!
-  movie_length: Float!
+  contentRating: String!
+  movieLength: Float!
   rating: Float!
-  created_at: String!
+  createdAt: String!
   trailer: String!
-  image_url: String!
+  imageUrl: String!
   release: String
   plot: String!
   banner: String!
   type: String!
-  genres: [Genre!]!
-  keywords: [Keyword!]!
+  genres: [Genre!]
+  keywords: [Keyword!]
 }
 
 enum MoviesSort {

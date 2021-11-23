@@ -11,7 +11,7 @@ export const signAccessToken = (payload: TokenPayload) => {
   try {
     return jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET!, {
       issuer: 'movies-app',
-      expiresIn: '15s',
+      expiresIn: '15m',
     });
   } catch (error) {
     throw new ApolloError('Internal server error');

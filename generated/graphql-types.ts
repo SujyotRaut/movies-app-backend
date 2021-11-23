@@ -36,14 +36,14 @@ export type Keyword = {
 export type Movie = {
   __typename?: 'Movie';
   banner: Scalars['String'];
-  content_rating: Scalars['String'];
-  created_at: Scalars['String'];
+  contentRating: Scalars['String'];
+  createdAt: Scalars['String'];
   description: Scalars['String'];
-  genres: Array<Genre>;
+  genres?: Maybe<Array<Genre>>;
   id: Scalars['ID'];
-  image_url: Scalars['String'];
-  keywords: Array<Keyword>;
-  movie_length: Scalars['Float'];
+  imageUrl: Scalars['String'];
+  keywords?: Maybe<Array<Keyword>>;
+  movieLength: Scalars['Float'];
   plot: Scalars['String'];
   popularity: Scalars['Int'];
   rating: Scalars['Float'];
@@ -63,10 +63,17 @@ export enum MoviesSort {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  addToWatchlist: Scalars['String'];
   login: AuthPayload;
   logout: Scalars['Boolean'];
-  refresh_token: AuthPayload;
+  refresh: AuthPayload;
   register: AuthPayload;
+  removeFromWatchlist: Scalars['String'];
+};
+
+
+export type MutationAddToWatchlistArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -76,13 +83,8 @@ export type MutationLoginArgs = {
 };
 
 
-export type MutationLogoutArgs = {
-  refresh_token: Scalars['String'];
-};
-
-
-export type MutationRefresh_TokenArgs = {
-  refresh_token: Scalars['String'];
+export type MutationRefreshArgs = {
+  refreshToken: Scalars['String'];
 };
 
 
@@ -90,6 +92,11 @@ export type MutationRegisterArgs = {
   email: Scalars['String'];
   name: Scalars['String'];
   password: Scalars['String'];
+};
+
+
+export type MutationRemoveFromWatchlistArgs = {
+  id: Scalars['ID'];
 };
 
 export enum Order {
@@ -122,6 +129,7 @@ export type User = {
   email: Scalars['String'];
   id: Scalars['ID'];
   name: Scalars['String'];
+  watchlist?: Maybe<Array<Movie>>;
 };
 
 
@@ -246,14 +254,14 @@ export type KeywordResolvers<ContextType = Context, ParentType extends Resolvers
 
 export type MovieResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Movie'] = ResolversParentTypes['Movie']> = {
   banner?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  content_rating?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  created_at?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  contentRating?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  genres?: Resolver<Array<ResolversTypes['Genre']>, ParentType, ContextType>;
+  genres?: Resolver<Maybe<Array<ResolversTypes['Genre']>>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  image_url?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  keywords?: Resolver<Array<ResolversTypes['Keyword']>, ParentType, ContextType>;
-  movie_length?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  imageUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  keywords?: Resolver<Maybe<Array<ResolversTypes['Keyword']>>, ParentType, ContextType>;
+  movieLength?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   plot?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   popularity?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   rating?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
@@ -266,10 +274,12 @@ export type MovieResolvers<ContextType = Context, ParentType extends ResolversPa
 };
 
 export type MutationResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  addToWatchlist?: Resolver<ResolversTypes['String'], ParentType, ContextType, RequireFields<MutationAddToWatchlistArgs, 'id'>>;
   login?: Resolver<ResolversTypes['AuthPayload'], ParentType, ContextType, RequireFields<MutationLoginArgs, 'email' | 'password'>>;
-  logout?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationLogoutArgs, 'refresh_token'>>;
-  refresh_token?: Resolver<ResolversTypes['AuthPayload'], ParentType, ContextType, RequireFields<MutationRefresh_TokenArgs, 'refresh_token'>>;
+  logout?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  refresh?: Resolver<ResolversTypes['AuthPayload'], ParentType, ContextType, RequireFields<MutationRefreshArgs, 'refreshToken'>>;
   register?: Resolver<ResolversTypes['AuthPayload'], ParentType, ContextType, RequireFields<MutationRegisterArgs, 'email' | 'name' | 'password'>>;
+  removeFromWatchlist?: Resolver<ResolversTypes['String'], ParentType, ContextType, RequireFields<MutationRemoveFromWatchlistArgs, 'id'>>;
 };
 
 export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
@@ -282,6 +292,7 @@ export type UserResolvers<ContextType = Context, ParentType extends ResolversPar
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  watchlist?: Resolver<Maybe<Array<ResolversTypes['Movie']>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

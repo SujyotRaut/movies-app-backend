@@ -25,18 +25,18 @@ type Movie {
   year: Int!
   popularity: Int!
   description: String!
-  content_rating: String!
-  movie_length: Float!
+  contentRating: String!
+  movieLength: Float!
   rating: Float!
-  created_at: String!
+  createdAt: String!
   trailer: String!
-  image_url: String!
+  imageUrl: String!
   release: String
   plot: String!
   banner: String!
   type: String!
-  genres: [Genre!]!
-  keywords: [Keyword!]!
+  genres: [Genre!]
+  keywords: [Keyword!]
 }
 
 enum MoviesSort {
@@ -47,10 +47,12 @@ enum MoviesSort {
 }
 
 type Mutation {
-  register( name: String!, email: String!, password: String!): AuthPayload!
+  register(name: String!, email: String!, password: String!): AuthPayload!
   login(email: String!, password: String!): AuthPayload!
-  logout(refresh_token: String!): Boolean!
-  refresh_token(refresh_token: String!): AuthPayload!
+  logout: Boolean!
+  refresh(refreshToken: String!): AuthPayload!
+  addToWatchlist(id: ID!): String!
+  removeFromWatchlist(id: ID!): String!
 }
 
 type Query {
@@ -68,5 +70,6 @@ type User {
   id: ID!
   name: String!
   email: String!
+  watchlist: [Movie!]
 }
 

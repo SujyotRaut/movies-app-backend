@@ -1,8 +1,14 @@
 import { Resolvers } from '../../../generated/graphql-types';
+import Movie from './Movie';
 import Mutation from './Mutation';
 import Query from './Query';
+import User from './User';
 
-export default {
+const resolvers: Resolvers = {
   Query,
   Mutation,
-} as Resolvers;
+  Movie,
+  User,
+};
+
+export default resolvers;
